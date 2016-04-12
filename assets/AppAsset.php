@@ -7,6 +7,7 @@
 
 namespace app\assets;
 
+use yii\web\View;
 use yii\web\AssetBundle;
 
 /**
@@ -19,11 +20,22 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/style.css',
+        //'css/bootstrap.css'
+
     ];
     public $js = [
+        'js/easing.js',
+        'js/jquery.mixitup.min.js',
+        //'js/jquery-1.8.3.min.js',
+        'js/move-top.js',
+        'js/responsiveslides.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+    ];
+    public $jsOptions = [
+        'position' => View::POS_HEAD,
     ];
 }
