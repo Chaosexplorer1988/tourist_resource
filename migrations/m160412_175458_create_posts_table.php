@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `turizm`.`posts` (
   INDEX `author_idx` (`author` ASC),
   CONSTRAINT `author`
     FOREIGN KEY (`author`)
-    REFERENCES `turizm`.`users` (`id_users`)
+    REFERENCES `turizm`.`table_user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

@@ -15,7 +15,7 @@ class m160412_180026_create_photos_table extends Migration
   INDEX `id_users_idx` (`id_users` ASC),
   CONSTRAINT `id_users`
     FOREIGN KEY (`id_users`)
-    REFERENCES `users` (`id_users`)
+    REFERENCES `table_user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

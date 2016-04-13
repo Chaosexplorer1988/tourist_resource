@@ -18,7 +18,7 @@ class m160412_175833_create_comments_table extends Migration
   INDEX `id_comment_idx` (`id_post` ASC),
   CONSTRAINT `creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `users` (`id_users`)
+    REFERENCES `table_user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `id_comment`
