@@ -59,13 +59,13 @@ $this->title = 'My Yii Application';
                 <span class="menu"><img src="../images/nav-icon.png" alt="white label travel website"/></span>
                 <ul>
                     <nav class="cl-effect-5">
-                        <li><a href="index.html" class="active"><span data-hover="Home">Home</span></a></li>
-                        <li><a href="about-us-white-label-travel-portal.html"><span data-hover="About us">About us</span></a></li>
-                        <li><a href="pricing.html"><span data-hover="Pricing">Pricing</span></a></li>
-                        <li><a href="portfolio.html"><span data-hover="Portfolio">Portfolio</span></a></li>
-                        <li><a href="enquiry.html"><span data-hover="Enquiry">Enquiry</span></a></li>
-                        <li><a href="contact.html"><span data-hover="contact us">contact us</span></a></li>
-                        <li><a href="support.html"><span data-hover="Support">Support</span></a></li>
+                        <li><a href="/" class="active"><span data-hover="Маршруты">Маршруты</span></a></li>
+                        <li><a href="about-us-white-label-travel-portal.html"><span data-hover="О нас">О нас</span></a></li>
+                        <li><a href="pricing.html"><span data-hover="Цены">Цены</span></a></li>
+                        <li><a href="portfolio.html"><span data-hover="Фото">Фото</span></a></li>
+                        <li><a href="enquiry.html"><span data-hover="Вопросы">Вопросы</span></a></li>
+                        <li><a href="contact.html"><span data-hover="Контакты">Контакты</span></a></li>
+                        <li><a href="support.html"><span data-hover="Поддержка">Поддержка</span></a></li>
                     </nav>
                 </ul>
                 <div class="clearfix"></div>
@@ -106,8 +106,13 @@ $this->title = 'My Yii Application';
                     <i><img src="../images/flight-icon.png" alt="Air Ticket Booking Engine"/></i>
                 </div>
                 <div class="passion">
-                    <h4 title="Flight Booking">Flight Booking</h4>
-                    <p>Our Online Air Ticket Booking Engine is directly linked with the GDS through API which fetch the online inventory on air ticket and display the search result. After selecting the particular search result it will be redirected to payment gateway for payment processing.</p>
+                    <h4 title="Хорватия (2 дня)">Хорватия (2 дня)</h4>
+                    <p>Сплит является самым крупным городом на побережье Адриатического моря.
+                        Осмотреть Дворец Диоклетиана, древнеримский комплекс в центре города (раньше фильм Игра престолов!).
+                        Пляж бачвице, известный своим мягким песком и прозрачной водой, является излюбленным с местными жителями. Попробовать игру Пицигина, традиционную игру от сплит играла на мелководье.
+
+                        Аэропорт сплита находится в 15,5 миль (25 км) к западу от Сплита. Есть также железнодорожное сообщение между Сплите и Загребе.
+                    </p>
                 </div>
                 <div class="clearfix"></div>
             </div>
