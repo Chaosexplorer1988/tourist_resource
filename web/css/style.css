@@ -2865,4 +2865,9 @@ background: rgba(245, 245, 245, 0.9);
 		}
 	}
 				
-		
+
+.user-index {
+
+	margin: 0 auto;
+	max-width: 90%;
+}
