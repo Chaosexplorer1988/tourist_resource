@@ -63,9 +63,12 @@ $this->title = 'My Yii Application';
                         <li><a href="about-us-white-label-travel-portal.html"><span data-hover="О нас">О нас</span></a></li>
                         <li><a href="pricing.html"><span data-hover="Цены">Цены</span></a></li>
                         <li><a href="portfolio.html"><span data-hover="Фото">Фото</span></a></li>
-                        <li><a href="enquiry.html"><span data-hover="Вопросы">Вопросы</span></a></li>
+                        <li><a href="enquiry.html"><span data-hover="Форум">Форум</span></a></li>
                         <li><a href="contact.html"><span data-hover="Контакты">Контакты</span></a></li>
-                        <li><a href="support.html"><span data-hover="Поддержка">Поддержка</span></a></li>
+                       <!-- <li><a href="support.html"><span data-hover="Поддержка">Поддержка</span></a></li>-->
+                        <?php if(!Yii::$app->user->isGuest){?>
+                        <li><a href="support.html"><span data-hover="Мои статьи">Мои статьи</span></a></li>
+                        <?php }?>
                     </nav>
                 </ul>
                 <div class="clearfix"></div>
@@ -103,35 +106,32 @@ $this->title = 'My Yii Application';
         <div class="beautifull-grids">
             <div class="col-md-4 beautiful-grid">
                 <div class="icon1">
-                    <i><img src="../images/flight-icon.png" alt="Air Ticket Booking Engine"/></i>
+                    <i><img src="../images/flight-icon.png" alt="Транспортные расходы"/></i>
                 </div>
                 <div class="passion">
-                    <h4 title="Хорватия (2 дня)">Хорватия (2 дня)</h4>
-                    <p>Сплит является самым крупным городом на побережье Адриатического моря.
-                        Осмотреть Дворец Диоклетиана, древнеримский комплекс в центре города (раньше фильм Игра престолов!).
-                        Пляж бачвице, известный своим мягким песком и прозрачной водой, является излюбленным с местными жителями. Попробовать игру Пицигина, традиционную игру от сплит играла на мелководье.
-
-                        Аэропорт сплита находится в 15,5 миль (25 км) к западу от Сплита. Есть также железнодорожное сообщение между Сплите и Загребе.
+                    <h4 title="Транспортные расходы">Транспортные расходы</h4>
+                    <p>
+                        Аэропорт находится в 15,5 миль (25 км) к западу от Сплита. Есть также железнодорожное сообщение между Сплите и Загребе.
                     </p>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="col-md-4 beautiful-grid">
                 <div class="icon1">
-                    <i><img src="../images/hotel-icon.png" alt="Hotel Booking"/></i>
+                    <i><img src="../images/hotel-icon.png" alt="Расходы на проживание"/></i>
                 </div>
                 <div class="passion">
-                    <h4 title="Hotel Booking">Hotel Booking</h4>
+                    <h4 title="Расходы на проживание">Расходы на проживание</h4>
                     <p>Advanced XML and API integration makes our Online Hotel Booking System unique and search for the lowest tariffs available with hotels. After selecting the particular search result it will be redirected to payment gateway for payment processing.</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="col-md-4 beautiful-grid">
                 <div class="icon1">
-                    <i><img src="../images/holiday-icon.png" alt="Holiday Booking" /></i>
+                    <i><img src="../images/holiday-icon.png" alt="Расходы на отдых" /></i>
                 </div>
                 <div class="passion">
-                    <h4 title="Holiday Booking">Holiday Booking</h4>
+                    <h4 title="Расходы на отдых">Расходы на отдых</h4>
                     <p>Advanced XML and API integration makes our Online Domestic & International Holidays
                         booking System unique and search for the lowest tariffs available with hotels. After selecting the particular search result it will be redirected to payment gateway for payment processing.</p>
                 </div>
@@ -139,8 +139,21 @@ $this->title = 'My Yii Application';
             </div>
             <div class="clearfix"></div>
         </div>
-
-        <div class="beautifull-grids">
+        <div class="user-form">
+        <?php $form = \yii\widgets\ActiveForm::begin(); ?>
+            <h2>Выбор страны</h2>
+        <?=
+        /* @var $model app\models\Country*/
+        $form->field($model, 'Name')->widget(
+            \yii\jui\AutoComplete::className(),[
+            'clientOptions' => [
+                'source' => $e
+            ],
+            'options' =>[
+                'class'=>'form-control']
+        ]) ?>
+            <?php \yii\widgets\ActiveForm::end(); ?>
+       <!-- <div class="beautifull-grids">
             <div class="col-md-4 beautiful-grid">
                 <div class="icon1">
                     <i><img src="../images/xml-api-icon.png" alt="Travel API Intetration"/></i>
@@ -169,7 +182,7 @@ $this->title = 'My Yii Application';
                 <div class="passion">
                     <h4 title="Maintenance & Support">Maintenance & Support</h4>
                     <p>We offer website maintenance services to global Clients for Online Robust Meta Search, Travel Portal Development. Flight Reservation System, Hotel Reservation System, Holiday Packages Domestic & International.</p>
-                </div>
+                </div>-->
                 <div class="clearfix"></div>
             </div>
             <div class="clearfix"></div>

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Country;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -49,7 +50,12 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new Country();
+        $e = Country::find()
+            ->select(['Name as value', 'Name as label', 'id'])
+            ->asArray()
+            ->all();
+        return $this->render('index', ['e'=> $e,'model' =>$model]);
     }
 
     public function actionLogin()
