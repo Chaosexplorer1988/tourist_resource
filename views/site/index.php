@@ -59,16 +59,17 @@ $this->title = 'My Yii Application';
                 <span class="menu"><img src="../images/nav-icon.png" alt="white label travel website"/></span>
                 <ul>
                     <nav class="cl-effect-5">
-                        <li><a href="/" class="active"><span data-hover="Маршруты">Маршруты</span></a></li>
+                        <?php if(!Yii::$app->user->isGuest){?>
+                        <li><a href="/posts/create" class="active"><span data-hover="Создать статью">Создать статью</span></a></li>
+                        <li><a href="/posts"><span data-hover="Мои статьи">Мои статьи</span></a></li>
+                        <?php }?>
                         <li><a href="about-us-white-label-travel-portal.html"><span data-hover="О нас">О нас</span></a></li>
                         <li><a href="pricing.html"><span data-hover="Цены">Цены</span></a></li>
                         <li><a href="portfolio.html"><span data-hover="Фото">Фото</span></a></li>
                         <li><a href="enquiry.html"><span data-hover="Форум">Форум</span></a></li>
                         <li><a href="contact.html"><span data-hover="Контакты">Контакты</span></a></li>
                        <!-- <li><a href="support.html"><span data-hover="Поддержка">Поддержка</span></a></li>-->
-                        <?php if(!Yii::$app->user->isGuest){?>
-                        <li><a href="support.html"><span data-hover="Мои статьи">Мои статьи</span></a></li>
-                        <?php }?>
+
                     </nav>
                 </ul>
                 <div class="clearfix"></div>
@@ -99,6 +100,13 @@ $this->title = 'My Yii Application';
 </div>
 <div class="beautifull">
     <div class="container">
+        <?php
+        //Здесь надо будет придумать оформление
+        foreach ($q as $item){
+            echo $item['title']."<br>";
+            echo $item['text'];
+        }
+        ?>
         <div class="beautifull-header">
             <h4>Our Specialized White Label Travel Portal Solutions</h4>
             <p>We provides you travel portal development service like White Label B2B Travel Portal, White Label B2C Travel Portal, White Label Travel Portal, Travel Portal API, Flight xml API more.</p>

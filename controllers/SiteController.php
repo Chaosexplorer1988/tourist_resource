@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Country;
+use app\models\Posts;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -50,12 +51,13 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $q = Posts::find()->all();
         $model = new Country();
-        $e = Country::find()
+        $e = $model::find()
             ->select(['Name as value', 'Name as label', 'id'])
             ->asArray()
             ->all();
-        return $this->render('index', ['e'=> $e,'model' =>$model]);
+        return $this->render('index', ['q'=> $q,'e'=> $e,'model' =>$model]);
     }
 
     public function actionLogin()
