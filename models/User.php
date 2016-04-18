@@ -12,7 +12,7 @@ use yii\web\IdentityInterface;
  * @property string $name
  * @property string $surname
  * @property string $password
- * @property string $salt
+
  * @property string $access_token
  * @property datetime $create_date
  */
@@ -98,7 +98,7 @@ class User extends ActiveRecord implements IdentityInterface
         $user->username = $this->username;
         $user->name = $this->name;
         $user->surname = $this->surname;
-        $user->setPassword($this->password);
+        $user->password = $this->password;
         $user->generateAuthKey();
 
         return $user->save() ? $user : null;
