@@ -18,7 +18,7 @@ class m160412_180026_create_photos_table extends Migration
     REFERENCES `table_user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB CHARACTER SET UTF8;
          ");
     }
 

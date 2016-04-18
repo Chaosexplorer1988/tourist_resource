@@ -13,7 +13,8 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $rememberMe = true;
-
+    public $name;
+    public $surname;
     private $_user = false;
 
 
@@ -24,11 +25,24 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['username', 'password'], 'required', 'message' => 'Поле должно быть заполнено'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+        ];
+    }
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels ()
+    {
+        return [
+            //'id' => _('ID'),
+            'username' => _('Email'),
+            'password' => _('Пароль'),
+            'rememberMe' => _('Запомнить меня')
+
         ];
     }
 

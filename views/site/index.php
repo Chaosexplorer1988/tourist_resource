@@ -27,16 +27,17 @@ $this->title = 'My Yii Application';
         });
     });
 </script>
-<div class="header" id="home">
+
+<div style="margin-top: 40px" class="header" id="home">
 
     <div class="header-top">
         <div class="container">
             <div class="icon">
                 <ul>
                     <li><i class="message"></i></li>
-                    <li><a href="mailto:b2c@micronetgroup.co.in">b2c@micronetgroup.co.in</a></li>
-                    <li><i class="phone"></i></li>
-                    <li><p>+91 9540-01-02-03</p></li>
+                    <li><a href="mailto:mashimp@mail.ru">mashimp@mail.ru</a></li>
+                   <!-- <li><i class="phone"></i></li>-->
+
                 </ul>
             </div>
             <div class="social-icons">
@@ -104,7 +105,7 @@ $this->title = 'My Yii Application';
         //Здесь надо будет придумать оформление
         foreach ($q as $item){
             echo $item['title']."<br>";
-            echo $item['text'];
+            echo $item['text']."<br>";
         }
         ?>
         <div class="beautifull-header">

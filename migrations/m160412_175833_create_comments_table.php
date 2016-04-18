@@ -26,7 +26,7 @@ class m160412_175833_create_comments_table extends Migration
     REFERENCES `posts` (`id_post`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB CHARACTER SET UTF8;
          ");
     }
 

@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `turizm`.`posts` (
     REFERENCES `turizm`.`table_user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB CHARACTER SET UTF8;
          ");
     }
 

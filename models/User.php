@@ -1,10 +1,21 @@
 <?php
 
 namespace app\models;
-
+use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-
+/**
+ * User model
+ *
+ * @property integer $id
+ * @property string $username
+ * @property string $name
+ * @property string $surname
+ * @property string $password
+ * @property string $salt
+ * @property string $access_token
+ * @property datetime $create_date
+ */
 class User extends ActiveRecord implements IdentityInterface
 {
     /**
@@ -24,9 +35,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules ()
     {
         return [
-            [['username', 'name', 'surname', 'password'], 'required', 'message' => 'Кастомное поле'],
+            [['username', 'name', 'surname', 'password'], 'required', 'message' => 'Поле должно быть заполнено'],
             [['password'], 'string', 'min' => self::MIN_LENGTH_PASS],
-            [['username'], 'email'],
+            [['username'], 'email', 'message' => 'Поле не соответствует формату email'],
             [['username', 'access_token'], 'unique'],
         ];
     }
@@ -37,7 +48,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => _('ID'),
-            'username' => _('Логин'),
+            'username' => _('Email'),
             'name' => _('Имя'),
             'surname' => _('Фамилия'),
             'password' => _('Пароль'),
@@ -77,6 +88,21 @@ class User extends ActiveRecord implements IdentityInterface
      * Generate the salt
      * @return string
      */
+    public function signup()
+    {
+        if (!$this->validate()) {
+            return null;
+        }
+
+        $user = new User();
+        $user->username = $this->username;
+        $user->name = $this->name;
+        $user->surname = $this->surname;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+
+        return $user->save() ? $user : null;
+    }
     public function saltGenerator ()
     {
         return hash("sha512", uniqid('salt_', true));

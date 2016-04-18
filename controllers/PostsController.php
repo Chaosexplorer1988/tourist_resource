@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\models\Posts;
 use app\models\search\PostsSearch;
 use yii\web\Controller;
@@ -79,7 +80,7 @@ class PostsController extends Controller
         $model->date_post = date("Y-m-d");
         $model->time_post = date("H:i ", strtotime("+3 hours"));
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_post]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
