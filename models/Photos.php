@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Posts;
 
 /**
  * This is the model class for table "photos".

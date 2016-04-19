@@ -9,6 +9,8 @@ use app\models\search\PostsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Photos;
+use yii\web\UploadedFile;
 
 /**
  * PostsController implements the CRUD actions for Posts model.
@@ -80,6 +82,14 @@ class PostsController extends Controller
         $model->date_post = date("Y-m-d");
         $model->time_post = date("H:i ", strtotime("+3 hours"));
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->file->saveAs('uploads/'.$model->file->baseName . '.' .$model->file->extension);
+            $model2 = new Photos;
+            $model2->url_photo = 'uploads/' .$model->file->baseName . '.' . $model->file->extension;
+            $model2->id_users = $model->author;
+            $model2->save();
+
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -99,6 +109,14 @@ class PostsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->file->saveAs('uploads/'.$model->file->baseName . '.' .$model->file->extension);
+            $model2 = new Photos;
+            $model2->url_photo = 'uploads/' .$model->file->baseName . '.' . $model->file->extension;
+            $model2->id_users = $model->author;
+            $model2->save();
+            
             return $this->redirect(['view', 'id' => $model->id_post]);
         } else {
             return $this->render('update', [
