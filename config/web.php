@@ -48,6 +48,10 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'authManager' => [
+            'class'=>'yii\rbac\DbManager',
+        ],
+
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -56,6 +60,21 @@ $config = [
             ],
         ],
         */
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+        ],
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\classes\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'user/create',
+            'posts/create',
+            'posts/index'
+
+        ]
     ],
     'params' => $params,
 ];

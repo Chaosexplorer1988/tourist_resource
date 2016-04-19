@@ -51,9 +51,15 @@ AppAsset::register($this);
 //                )
 //                . Html::endForm()
 //                . '</li>'
-            )
+            ),
+            Yii::$app->user->can('permission_admin') ? (
+                ['label' => 'Админка', 'url' => ['/admin']]
+            ):""
         ],
     ]);
+    if (Yii::$app->user->can('permission_admin'))
+        $items[] = ['lable' => 'Админка', 'url' => ['/admin']];
+
     NavBar::end();
     ?>
 

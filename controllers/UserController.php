@@ -21,12 +21,17 @@ class UserController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'delete'],
+                'only' => ['index', 'delete', 'create'],
                 'rules' => [
                     [
                         'actions' => ['index', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+                        'roles' => ['?'],
                     ],
                 ],
             ],
