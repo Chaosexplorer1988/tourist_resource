@@ -73,7 +73,6 @@ $config = [
             'user/create',
             'posts/create',
             'posts/index'
-
         ]
     ],
     'params' => $params,

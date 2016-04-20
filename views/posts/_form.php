@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\AutoComplete;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Posts */
@@ -11,11 +12,31 @@ use yii\widgets\ActiveForm;
 <div class="posts-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <?= $form->field($model, 'file')->fileInput() ?>
+    <?=
+    $form->field($mod, 'Name')->widget(
+        AutoComplete::className(),[
+        'clientOptions' => [
+            'source' => $e
+        ],
+        'options' =>[
+            'class'=>'form-control']
+    ]) ?>
+    <?=
+    $form->field($modelCity, 'Name')->widget(
+        AutoComplete::className(),[
+        'clientOptions' => [
+            'source' => $city
+        ],
+        'options' =>[
+            'class'=>'form-control']
+    ]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'file')->fileInput() ?>
+
 
  <!--   <?= $form->field($model, 'date_post')->textInput() ?> -->
 

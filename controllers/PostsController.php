@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\City;
+use app\models\Country;
 use Yii;
 use yii\filters\AccessControl;
 use app\models\Posts;
@@ -75,12 +77,36 @@ class PostsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    public function actionSelectcity()
+    {
+
+        $country = $_POST['country'];
+        $results = new \app\models\Country();
+        $result = $results->find()->select('ID')->where(['Name'=>$country]);
+        $cityes = new \app\models\City();
+        $city = $cityes->find()->select('Name')->where(['Country'=>$result])->asArray()->all();
+        //$messages = array();
+        return $this->render('selectcity', [
+        'city' => $city
+        ]);
+
+    }
     public function actionCreate()
     {
         $model = new Posts();
         $model->author = Yii::$app->user->id;
         $model->date_post = date("Y-m-d");
         $model->time_post = date("H:i ", strtotime("+3 hours"));
+        $mod = new Country();
+        $e = $mod::find()
+            ->select(['Name as value', 'Name as label', 'id'])
+            ->asArray()
+            ->all();
+        $modelCity = new City();
+        $city = $modelCity::find()
+            ->select(['Name as value', 'Name as label', 'id'])            
+            ->asArray()
+            ->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $model->file = UploadedFile::getInstance($model, 'file');
@@ -94,6 +120,10 @@ class PostsController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'mod' => $mod,
+                'e'=> $e,
+                'modelCity' => $modelCity,
+                'city' => $city,
             ]);
         }
     }

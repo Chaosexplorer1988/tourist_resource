@@ -54,12 +54,12 @@ class Posts extends \yii\db\ActiveRecord
     {
         return [
             'id_post' => 'Id Post',
-            'title' => 'Title',
-            'text' => 'Text',
+            'title' => 'Заголовок',
+            'text' => 'Полный текст',
             'author' => 'Author',
             'likes' => 'Likes',
             'counts' => 'Counts',
-            'file' => 'Add your photo',
+            'file' => 'Добавить фото',
             'date_post' => 'Date Post',
             'time_post' => 'Time Post',
         ];

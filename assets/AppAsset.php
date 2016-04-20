@@ -27,7 +27,7 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/easing.js',
         'js/jquery.mixitup.min.js',
-        //'js/jquery-1.8.3.min.js',
+        'js/selectcity.js',
         'js/move-top.js',
         'js/responsiveslides.min.js'
     ];
