@@ -21,15 +21,8 @@ use yii\jui\AutoComplete;
         'options' =>[
             'class'=>'form-control']
     ]) ?>
-    <?=
-    $form->field($modelCity, 'Name')->widget(
-        AutoComplete::className(),[
-        'clientOptions' => [
-            'source' => $city
-        ],
-        'options' =>[
-            'class'=>'form-control']
-    ]) ?>
+
+    <?= $form->field($modelCity, 'Name')->textInput() ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
