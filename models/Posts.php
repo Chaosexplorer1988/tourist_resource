@@ -72,6 +72,14 @@ class Posts extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Comments::className(), ['id_post' => 'id_post']);
     }
+    //Функция для обрезания большого текста
+    public function cut($string, $length)
+    {
+        $string = mb_substr($string, 0, $length,'UTF-8'); // обрезаем и работаем со всеми кодировками и указываем исходную кодировку
+        $position = mb_strrpos($string, ' ', 'UTF-8'); // определение позиции последнего пробела. Именно по нему и разделяем слова
+        $string = mb_substr($string, 0, $position, 'UTF-8'); // Обрезаем переменную по позиции
+        return $string;
+    }
 
     /**
      * @return \yii\db\ActiveQuery

@@ -22,7 +22,7 @@ $(function () {
                     html[i] =  city[i].Name ;                 
                }
                 $('#city-name').autocomplete({ minLength: 2, source: html.unique()});
-               // console.log(html);
+                console.log(html);
           }
        });
 

@@ -58,9 +58,7 @@ AppAsset::register($this);
             ):""
         ],
     ]);
-    if (Yii::$app->user->can('permission_admin'))
-        $items[] = ['lable' => 'Админка', 'url' => ['/admin']];
-
+    
     NavBar::end();
     ?>
 

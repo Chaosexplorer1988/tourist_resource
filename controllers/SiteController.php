@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Country;
+use app\models\Photos;
 use app\models\Posts;
 use Yii;
 use yii\filters\AccessControl;
@@ -51,13 +52,21 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $q = Posts::find()->all();
+        $photo = Photos::find()->all();
+        $posts = new Posts();
+        $q = $posts->find()->asArray()->all();
+        for($i=0;$i<count($q);$i++)
+        {
+            $short_text = $posts->cut($q[$i]['text'], 200);
+            $q[$i]['short_text']=$short_text;
+        }
+
         $model = new Country();
         $e = $model::find()
             ->select(['Name as value', 'Name as label', 'id'])
             ->asArray()
             ->all();
-        return $this->render('index', ['q'=> $q,'e'=> $e,'model' =>$model]);
+        return $this->render('index', ['q' => $q,'e'=> $e,'model' =>$model, 'photo' =>$photo]);
     }
 
     public function actionLogin()

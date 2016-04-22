@@ -98,16 +98,37 @@ $this->title = 'My Yii Application';
         </div>
     </div>
 </div>
-</div>
+
 <div class="beautifull">
     <div class="container">
         <?php
         //Здесь надо будет придумать оформление
         foreach ($q as $item){
-            echo $item['title']."<br>";
-            echo $item['text']."<br>";
-        }
         ?>
+        <section class="posts">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="hello"><?= $item['title']?></h2>
+
+                        <p>
+                            <?= $item['short_text']?>
+                        </p>
+
+                    </div>
+                    <div class="col-md-6">
+                        <article class="tags"><em>Сюда можно описание картинки вкорячить</em></article>
+                        <img class="img-responsive" src="../uploads/i.jpg" alt="">
+
+                        <a class="button" href="/">Browse Projects</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+       <?php }
+        ?>
+        <br>
+        <br>
         <div class="beautifull-header">
             <h4>Our Specialized White Label Travel Portal Solutions</h4>
             <p>We provides you travel portal development service like White Label B2B Travel Portal, White Label B2C Travel Portal, White Label Travel Portal, Travel Portal API, Flight xml API more.</p>

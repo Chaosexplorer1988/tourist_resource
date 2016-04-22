@@ -36,6 +36,27 @@ body{
 	margin:0 0; 
 	font-family: 'Source Sans Pro', sans-serif;
 }
+.button {
+	text-align: center;
+	display: block;
+	background: 0 0;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	/*font-size: 13px;*/
+	font-family: montserratbold,sans-serif;
+	border: 2px solid #EF4D98;
+	padding: 15px;
+	width: 175px;
+	color: #EF4D98;
+	margin: 44px 12px;
+	float: left;
+}
+.button:hover{
+	background:#dd2476;
+	color:#fff;
+	text-decoration:none
+}
 .header-top {
 	background:rgba(232, 232, 232, 0.35);
 	height: 3em;
@@ -1241,12 +1262,12 @@ i.per{
 	color:#506a85;
 }
 a.button {
-  background-color: rgb(239, 77, 152);
-  font-size: 1.2em;
-  padding: 0.5em 1em;
+  /*background-color: rgb(239, 77, 152);*/
+  /*font-size: 1.2em;*/
+  /*padding: 0.5em 1em;*/
   text-transform: capitalize;
   text-decoration: none;
-  color: #fff;
+  /*color: #fff;*/
 }
 .page-not-found {
 	min-height: 690px;

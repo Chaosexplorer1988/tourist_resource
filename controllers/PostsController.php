@@ -133,7 +133,12 @@ class PostsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $mod = new Country();
+        $e = $mod::find()
+            ->select(['Name as value', 'Name as label', 'id'])
+            ->asArray()
+            ->all();
+        $modelCity = new City();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $model->file = UploadedFile::getInstance($model, 'file');
@@ -147,6 +152,9 @@ class PostsController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'mod'=> $mod,
+                'e'=>$e,
+                'modelCity' =>$modelCity,
             ]);
         }
     }
