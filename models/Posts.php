@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\UploadedFile;
+use rico\yii2images\behaviors\ImageBehave;
 
 /**
  * This is the model class for table "posts".
@@ -26,7 +27,7 @@ class Posts extends \yii\db\ActiveRecord
      * @inheritdoc
      */
 
-    public $file;
+    public $image;
     public static function tableName()
     {
         return 'posts';
@@ -41,7 +42,7 @@ class Posts extends \yii\db\ActiveRecord
             [['title', 'text', 'date_post', 'time_post'], 'required'],
             [['text'], 'string'],
             [['author', 'likes', 'counts'], 'integer'],
-            [['file'], 'file'],
+            [['image'], 'file'],
             [['date_post','counts','likes','author', 'time_post'], 'safe'],
             [['title'], 'string', 'max' => 45]
         ];
@@ -59,7 +60,7 @@ class Posts extends \yii\db\ActiveRecord
             'author' => 'Author',
             'likes' => 'Likes',
             'counts' => 'Counts',
-            'file' => 'Добавить фото',
+            'image' => 'Добавить фото',
             'date_post' => 'Date Post',
             'time_post' => 'Time Post',
         ];

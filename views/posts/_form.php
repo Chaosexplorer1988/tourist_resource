@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\AutoComplete;
+use rico\yii2images\behaviors\ImageBehave;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Posts */
@@ -28,9 +29,24 @@ use yii\jui\AutoComplete;
 
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'file')->fileInput() ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
+ <!--   <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <?
+            $images = $model2->getImages();
+            ?>
+            <div class="row">
+                <?php foreach ($images as $image): ?>
+                    <div class="col-md-3">
+                        <img src="<?=$image->getUrl('300x')?>" alt="">
+                    </div>
+                <?php endforeach ?>
+            </div>
+        </div>
+    </div>
 
+-->
  <!--   <?= $form->field($model, 'date_post')->textInput() ?> -->
 
   <!--  <?= $form->field($model, 'time_post')->textInput() ?> -->

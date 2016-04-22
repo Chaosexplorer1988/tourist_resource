@@ -12,7 +12,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Photos;
+use app\models\ImageModel;
 use yii\web\UploadedFile;
+use rico\yii2images\behaviors\ImageBehave;
 
 /**
  * PostsController implements the CRUD actions for Posts model.
@@ -25,6 +27,9 @@ class PostsController extends Controller
     public function behaviors()
     {
         return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['index','create','update', 'delete'],
@@ -105,11 +110,14 @@ class PostsController extends Controller
         $modelCity = new City();        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            $model->file = UploadedFile::getInstance($model, 'file');
-            $model->file->saveAs('uploads/'.$model->file->baseName . '.' .$model->file->extension);
-            $model2 = new Photos;
-            $model2->url_photo = 'uploads/' .$model->file->baseName . '.' . $model->file->extension;
-            $model2->id_users = $model->author;
+            $model->image = UploadedFile::getInstance($model, 'image');
+            if ($model->image) {
+                $model->image->saveAs('images/store/'.$model->image->baseName . '.' .$model->image->extension);
+            }
+            $model2 = new ImageModel;
+            $model2->filePath = 'images/store/' .$model->image->baseName . '.' . $model->image->extension;
+            $model2->itemId = $model->author;
+            $model2->modelName = 'ImageModel';
             $model2->save();
 
             return $this->redirect(['index']);
