@@ -9,7 +9,7 @@ use rico\yii2images\behaviors\ImageBehave;
 /**
  * This is the model class for table "posts".
  *
- * @property integer $id_post
+ * @property integer $id
  * @property string $title
  * @property string $text
  * @property integer $author
@@ -23,11 +23,19 @@ use rico\yii2images\behaviors\ImageBehave;
  */
 class Posts extends \yii\db\ActiveRecord
 {
+    //public $image;
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
     /**
      * @inheritdoc
      */
 
-    public $image;
     public static function tableName()
     {
         return 'posts';
@@ -40,9 +48,9 @@ class Posts extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'text', 'date_post', 'time_post'], 'required'],
-            [['text'], 'string'],
+            [['text','image'], 'string'],
             [['author', 'likes', 'counts'], 'integer'],
-            [['image'], 'file'],
+            //[['image'], 'file'],
             [['date_post','counts','likes','author', 'time_post'], 'safe'],
             [['title'], 'string', 'max' => 45]
         ];
@@ -54,7 +62,7 @@ class Posts extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_post' => 'Id Post',
+            'id' => 'Id Post',
             'title' => 'Заголовок',
             'text' => 'Полный текст',
             'author' => 'Author',
@@ -71,7 +79,7 @@ class Posts extends \yii\db\ActiveRecord
      */
     public function getComments()
     {
-        return $this->hasMany(Comments::className(), ['id_post' => 'id_post']);
+        return $this->hasMany(Comments::className(), ['id' => 'id']);
     }
     //Функция для обрезания большого текста
     public function cut($string, $length)
@@ -87,6 +95,6 @@ class Posts extends \yii\db\ActiveRecord
      */
     public function getAuthor0()
     {
-        return $this->hasOne(TableUser::className(), ['id' => 'author']);
+        return $this->hasOne(User::className(), ['id' => 'author']);
     }
 }

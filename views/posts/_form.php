@@ -31,22 +31,35 @@ use rico\yii2images\behaviors\ImageBehave;
 
     <?= $form->field($model, 'image')->fileInput() ?>
 
- <!--   <div class="form-group">
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <?
-            $images = $model2->getImages();
-            ?>
-            <div class="row">
-                <?php foreach ($images as $image): ?>
-                    <div class="col-md-3">
-                        <img src="<?=$image->getUrl('300x')?>" alt="">
-                    </div>
-                <?php endforeach ?>
+
+   <?php
+   $images = $model->getImages();?>
+   <div class="row">
+       <?php
+   foreach($images as $img){
+       //return url to full image
+       ?>
+       <div class="col-md-3">
+           <img src="<?= $img->getUrl('300x')?>" alt="">
+           </div>
+
+<?php
+       //return url to proportionally resized image by width
+      // echo $img->getUrl('300x');
+
+       //return url to proportionally resized image by height
+      // echo $img->getUrl('x300');
+
+       //return url to resized and cropped (center) image by width and height
+      // echo $img->getUrl('200x300');
+   }
+   ?>
             </div>
         </div>
     </div>
 
--->
  <!--   <?= $form->field($model, 'date_post')->textInput() ?> -->
 
   <!--  <?= $form->field($model, 'time_post')->textInput() ?> -->

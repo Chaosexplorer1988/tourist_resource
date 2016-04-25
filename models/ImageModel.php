@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-use rico\yii2images\behaviors\ImageBehave;
+
 
 /**
  * This is the model class for table "image".
@@ -18,6 +18,8 @@ use rico\yii2images\behaviors\ImageBehave;
  */
 class ImageModel extends \yii\db\ActiveRecord
 {
+    //public $image;
+    
     /**
      * @inheritdoc
      */
@@ -36,16 +38,11 @@ class ImageModel extends \yii\db\ActiveRecord
             [['itemId', 'isMain'], 'integer'],
             [['filePath', 'urlAlias'], 'string', 'max' => 400],
             [['modelName'], 'string', 'max' => 150],
+            //[['image'], 'file'],
             [['name'], 'string', 'max' => 80],
         ];
     }
 
-    
-    public function getImages() {
-        $obj = new ImageBehave();
-        return $obj->getImages();
-    }
-    
     /**
      * @inheritdoc
      */
@@ -56,6 +53,7 @@ class ImageModel extends \yii\db\ActiveRecord
             'filePath' => Yii::t('app', 'File Path'),
             'itemId' => Yii::t('app', 'Item ID'),
             'isMain' => Yii::t('app', 'Is Main'),
+            //'image' => 'Добавить фото',
             'modelName' => Yii::t('app', 'Model Name'),
             'urlAlias' => Yii::t('app', 'Url Alias'),
             'name' => Yii::t('app', 'Name'),

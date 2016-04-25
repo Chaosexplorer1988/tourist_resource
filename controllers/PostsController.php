@@ -27,9 +27,6 @@ class PostsController extends Controller
     public function behaviors()
     {
         return [
-            'image' => [
-                'class' => 'rico\yii2images\behaviors\ImageBehave',
-            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['index','create','update', 'delete'],
@@ -84,13 +81,11 @@ class PostsController extends Controller
      */
     public function actionSelectcity($country)
     {
-        //$model = new Posts();
-        //$country = $_POST;
         $results = new \app\models\Country();
         $result = $results->find()->select('ID')->where(['Name'=>$country]);
         $cityes = new \app\models\City();
         $city = $cityes->find()->select('Name')->where(['Country'=>$result])->asArray()->all();
-        //$messages = array();
+
         return $this->renderAjax('selectcity', [
         'city' => $city,
         ]);
@@ -107,18 +102,18 @@ class PostsController extends Controller
             ->select(['Name as value', 'Name as label', 'id'])
             ->asArray()
             ->all();
-        $modelCity = new City();        
+        $modelCity = new City();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $model->image = UploadedFile::getInstance($model, 'image');
             if ($model->image) {
                 $model->image->saveAs('images/store/'.$model->image->baseName . '.' .$model->image->extension);
             }
-            $model2 = new ImageModel;
-            $model2->filePath = 'images/store/' .$model->image->baseName . '.' . $model->image->extension;
-            $model2->itemId = $model->author;
-            $model2->modelName = 'ImageModel';
-            $model2->save();
+            //$model2 = new ImageModel;
+            //$model2->filePath = 'images/store/' .$model->image->baseName . '.' . $model->image->extension;
+            //$model2->itemId = $model->author;
+            //$model2->modelName = 'ImageModel';
+            //$model2->save();
 
             return $this->redirect(['index']);
         } else {
@@ -127,7 +122,7 @@ class PostsController extends Controller
                 'mod' => $mod,
                 'e'=> $e,
                 'modelCity' => $modelCity,
-                
+
             ]);
         }
     }
@@ -148,15 +143,18 @@ class PostsController extends Controller
             ->all();
         $modelCity = new City();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            $model->file = UploadedFile::getInstance($model, 'file');
-            $model->file->saveAs('uploads/'.$model->file->baseName . '.' .$model->file->extension);
-            $model2 = new Photos;
-            $model2->url_photo = 'uploads/' .$model->file->baseName . '.' . $model->file->extension;
-            $model2->id_users = $model->author;
-            $model2->save();
-            
-            return $this->redirect(['view', 'id' => $model->id_post]);
+            $model->image = UploadedFile::getInstance($model, 'image');
+            if($model->image) {
+                $path = Yii::getAlias('@webroot/upload/files/').$model->image->baseName.'.'.$model->image->extension;
+                $model->image->saveAs($path);
+                $model->attachImage($path);
+//                $model->file->saveAs('uploads/' . $model->file->baseName . '.' . $model->file->extension);
+//                $model2 = new Photos;
+//                $model2->url_photo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
+//                $model2->id_users = $model->author;
+//                $model2->save();
+            }
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

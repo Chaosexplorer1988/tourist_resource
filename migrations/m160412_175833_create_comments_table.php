@@ -23,7 +23,7 @@ class m160412_175833_create_comments_table extends Migration
     ON UPDATE NO ACTION,
   CONSTRAINT `id_comment`
     FOREIGN KEY (`id_post`)
-    REFERENCES `posts` (`id_post`)
+    REFERENCES `posts` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB CHARACTER SET UTF8;
