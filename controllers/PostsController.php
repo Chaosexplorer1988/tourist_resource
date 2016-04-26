@@ -15,6 +15,7 @@ use app\models\Photos;
 use app\models\ImageModel;
 use yii\web\UploadedFile;
 use rico\yii2images\behaviors\ImageBehave;
+use app\models\User;
 
 /**
  * PostsController implements the CRUD actions for Posts model.
@@ -69,8 +70,16 @@ class PostsController extends Controller
      */
     public function actionView($id)
     {
+       // $model = new Posts();
+        $model = Posts::findOne($id);
+        $model->counts = $model->counts + 1;
+        $model->save();
+        $user = User::findOne($model->author);
+        //$author_post = $user->name . $user->surname;
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'user' => $user
         ]);
     }
 
@@ -90,7 +99,7 @@ class PostsController extends Controller
         'city' => $city,
         ]);
     }
-    
+
     public function actionCreate()
     {
         $model = new Posts();
@@ -108,12 +117,9 @@ class PostsController extends Controller
             $model->image = UploadedFile::getInstance($model, 'image');
             if ($model->image) {
                 $model->image->saveAs('images/store/'.$model->image->baseName . '.' .$model->image->extension);
+                $model->image = 'images/store/'.$model->image->baseName . '.' .$model->image->extension;
+                $model->save();
             }
-            //$model2 = new ImageModel;
-            //$model2->filePath = 'images/store/' .$model->image->baseName . '.' . $model->image->extension;
-            //$model2->itemId = $model->author;
-            //$model2->modelName = 'ImageModel';
-            //$model2->save();
 
             return $this->redirect(['index']);
         } else {
