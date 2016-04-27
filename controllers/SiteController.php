@@ -56,7 +56,7 @@ class SiteController extends Controller
         //$photo = Photos::find()->all();
         $p = new ImageModel();
         $photo = $p->find()
-            ->select(['isMain', 'filePath'])
+            ->select(['itemid', 'filePath'])
             ->where(['isMain' =>! null])
             ->asArray()
             ->all();
@@ -66,7 +66,7 @@ class SiteController extends Controller
         {
             $short_text = $posts->cut($q[$i]['text'], 200);
             $q[$i]['short_text']=$short_text;
-            if($q[$i]['id']===$photo[$i]['isMain'])
+            if($q[$i]['id']===$photo[$i]['itemid'])
                 $q[$i]['imagePath'] = $photo[$i]['filePath'];
         }
 
