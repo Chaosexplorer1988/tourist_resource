@@ -16,6 +16,7 @@ use app\models\ImageModel;
 use yii\web\UploadedFile;
 use rico\yii2images\behaviors\ImageBehave;
 use app\models\User;
+use app\models\Comment;
 
 /**
  * PostsController implements the CRUD actions for Posts model.
@@ -70,21 +71,27 @@ class PostsController extends Controller
      */
     public function actionView($id)
     {
-       // $model = new Posts();
         $model = Posts::findOne($id);
         $model->counts = $model->counts + 1;
         $model->save();
         $user = User::findOne($model->author);
         $image = $model->getImage();
         $image = $image->getUrl('800x');
-        //$author_post = $user->name . $user->surname;
+        $comments = new Comment;
+        $comments = $comments->find()
+            ->where(['id_post'=>$id])
+            ->asArray()
+            ->all();
 
         return $this->render('view', [
             'model' => $this->findModel($id),
             'user' => $user,
-            'image' => $image
+            'image' => $image,
+            'comments' => $comments
         ]);
     }
+
+
 
     /**
      * Creates a new Posts model.
@@ -138,6 +145,27 @@ class PostsController extends Controller
 
             ]);
         }
+    }
+
+
+    public function actionCreatecomm ($id) {
+
+        $comment = new Comment();
+        $posts = Posts::findOne($id);
+        $comment->creator = Yii::$app->user->id;
+        $comment->id_post = $posts->id;
+        $comment->date_comment = date("Y-m-d");
+        $comment->time_comment = date("H:i ", strtotime("+3 hours"));
+        $comment->text_comment = Yii::$app->request->post('text');
+
+        $comment->save();
+        if ($comment->load(Yii::$app->request->post()) && $comment->save()) {
+            return $this->renderAjax('addcomment', [
+                'comment' => $comment,
+                'posts' => $posts
+            ]);
+        }
+        return $this->redirect(['view', 'id' => $comment->id_post]);
     }
 
     /**

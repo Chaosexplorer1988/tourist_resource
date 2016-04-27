@@ -138,7 +138,7 @@ a.desc:after {
     left: -61px;
     top: 20px;
     text-transform: capitalize;
- }
+}
 
 
 #post-cont h1 {
@@ -166,14 +166,16 @@ a.desc:after {
 }
 
 #post-comment input[type="submit"]{
-position: relative;
+    position: relative;
     left: 425px;
     width: 100px;
     height: 40px;
     font-size: 18px;
     margin-bottom: 20px;
 
- }
+}
+
+
 #post-comment textarea {
     width: 800px;
     height: 100px;
@@ -186,8 +188,8 @@ position: relative;
 
 #post-comment div {
     width: 800px;
-    background: #eee;
-cont h1
+
+    #cont h1
     display: block;
     margin: 0 auto;
     border-radius: 5px;
@@ -203,4 +205,13 @@ cont h1
 #post-comment h3 {
     text-align: center;
     margin-bottom: 20px;
+}
+
+.one-comment {
+    margin-bottom: 20px;
+    background: #eee;
+}
+
+.one-comment p span:nth-of-type(1) {
+    text-transform: capitalize;
 }

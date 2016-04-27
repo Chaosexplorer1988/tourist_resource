@@ -17,7 +17,7 @@ use Yii;
  * @property TableUser $creator0
  * @property Posts $idPost
  */
-class Comments extends \yii\db\ActiveRecord
+class Comment extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
