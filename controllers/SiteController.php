@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Country;
+use app\models\ImageModel;
 use app\models\Photos;
 use app\models\Posts;
 use Yii;
@@ -52,13 +53,21 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $photo = Photos::find()->all();
+        //$photo = Photos::find()->all();
+        $p = new ImageModel();
+        $photo = $p->find()
+            ->select(['isMain', 'filePath'])
+            ->where(['isMain' =>! null])
+            ->asArray()
+            ->all();
         $posts = new Posts();
         $q = $posts->find()->asArray()->all();
         for($i=0;$i<count($q);$i++)
         {
             $short_text = $posts->cut($q[$i]['text'], 200);
             $q[$i]['short_text']=$short_text;
+            if($q[$i]['id']===$photo[$i]['isMain'])
+                $q[$i]['imagePath'] = $photo[$i]['filePath'];
         }
 
         $model = new Country();
