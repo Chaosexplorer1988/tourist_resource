@@ -75,11 +75,14 @@ class PostsController extends Controller
         $model->counts = $model->counts + 1;
         $model->save();
         $user = User::findOne($model->author);
+        $image = $model->getImage();
+        $image = $image->getUrl('800x');
         //$author_post = $user->name . $user->surname;
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'user' => $user
+            'user' => $user,
+            'image' => $image
         ]);
     }
 
