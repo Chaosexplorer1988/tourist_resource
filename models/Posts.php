@@ -17,7 +17,8 @@ use rico\yii2images\behaviors\ImageBehave;
  * @property integer $counts
  * @property string $date_post
  * @property string $time_post
- *
+ * @property string $country
+ * @property string $city
  * @property Comments[] $comments
  * @property TableUser $author0
  */
@@ -48,11 +49,11 @@ class Posts extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'text', 'date_post', 'time_post'], 'required'],
-            [['text','image'], 'string'],
+            [['text','image','country','city'], 'string'],
             [['author', 'likes', 'counts'], 'integer'],
             //[['image'], 'file'],
-            [['date_post','counts','likes','author', 'time_post'], 'safe'],
-            [['title'], 'string', 'max' => 45]
+            [['date_post','country','city','counts','likes','author', 'time_post'], 'safe'],
+            [['title','city','country'], 'string', 'max' => 45]
         ];
     }
 
@@ -64,13 +65,15 @@ class Posts extends \yii\db\ActiveRecord
         return [
             'id' => 'Id Post',
             'title' => 'Заголовок',
+            'country' => 'Страна',
+            'city' => 'Город',
             'text' => 'Полный текст',
-            'author' => 'Author',
-            'likes' => 'Likes',
-            'counts' => 'Counts',
+            'author' => 'Автор',
+            'likes' => 'Лайки',
+            'counts' => 'Посещения',
             'image' => 'Добавить фото',
-            'date_post' => 'Date Post',
-            'time_post' => 'Time Post',
+            'date_post' => 'Дата создания статьи',
+            'time_post' => 'Время создания статьи',
         ];
     }
 

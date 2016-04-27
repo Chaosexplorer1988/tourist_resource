@@ -115,15 +115,19 @@ class PostsController extends Controller
             ->asArray()
             ->all();
         $modelCity = new City();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->country = Yii::$app->request->post('Country')['Name'];
+            $model->city = Yii::$app->request->post('City')['Name'];
+            $model->image = UploadedFile::getInstance($model, 'image')->name;
+            $model->save();
+            $model2 = $this->findModel($model->id);
 
-            $model->image = UploadedFile::getInstance($model, 'image');
-            if ($model->image) {
-                $model->image->saveAs('images/store/'.$model->image->baseName . '.' .$model->image->extension);
-                $model->image = 'images/store/'.$model->image->baseName . '.' .$model->image->extension;
-                $model->save();
+            $model2->image = UploadedFile::getInstance($model2, 'image');
+            if($model2->image) {
+                $path = Yii::getAlias('@webroot/upload/files/').$model2->image->baseName.'.'.$model2->image->extension;
+                $model2->image->saveAs($path);
+                $model2->attachImage($path);
             }
-
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [

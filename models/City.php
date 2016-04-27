@@ -64,7 +64,7 @@ class City extends \yii\db\ActiveRecord
             'Lon' => 'Lon',
             'Lat' => 'Lat',
             'Prefix' => 'Prefix',
-            'Name' => 'Name',
+            'Name' => 'Город',
             'Type' => 'Type',
             'TZ' => 'Tz',
             'TimeZone' => 'Time Zone',

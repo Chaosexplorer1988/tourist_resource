@@ -30,39 +30,47 @@ use rico\yii2images\behaviors\ImageBehave;
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'image')->fileInput() ?>
+    <?php
+    if (!$model->getIsNewRecord())
+    {?>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
 
-   <?php
-   $images = $model->getImages();?>
-   <div class="row">
-       <?php
-   foreach($images as $img){
-       //return url to full image
-       ?>
-       <div class="col-md-3">
-           <img src="<?= $img->getUrl('300x')?>" alt="">
-           </div>
 
-<?php
-       //return url to proportionally resized image by width
-      // echo $img->getUrl('300x');
 
-       //return url to proportionally resized image by height
-      // echo $img->getUrl('x300');
+            <?php
+   $images = $model->getImages(); ?>
+            <div class="row">
+                <?php
+                foreach ($images as $img) {
+                    //return url to full image
+                    ?>
+                    <div class="col-md-3">
+                        <img src="<?= $img->getUrl('300x') ?>" alt="">
+                    </div>
 
-       //return url to resized and cropped (center) image by width and height
-      // echo $img->getUrl('200x300');
-   }
-   ?>
+                    <?php
+                    //return url to proportionally resized image by width
+                    // echo $img->getUrl('300x');
+
+                    //return url to proportionally resized image by height
+                    // echo $img->getUrl('x300');
+
+                    //return url to resized and cropped (center) image by width and height
+                    // echo $img->getUrl('200x300');
+                }
+    ?>
             </div>
         </div>
     </div>
+                <?php
+                 echo $form->field($model, 'date_post')->textInput();
 
- <!--   <?= $form->field($model, 'date_post')->textInput() ?> -->
+                echo $form->field($model, 'time_post')->textInput();
+            }
+   ?>
 
-  <!--  <?= $form->field($model, 'time_post')->textInput() ?> -->
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
