@@ -80,6 +80,7 @@ class PostsController extends Controller
         $comments = new Comment;
         $comments = $comments->find()
             ->where(['id_post'=>$id])
+            ->orderBy(['id_comment'=> SORT_DESC])
             ->asArray()
             ->all();
 
@@ -147,25 +148,25 @@ class PostsController extends Controller
         }
     }
 
-
-    public function actionCreatecomm ($id) {
+    public function actionCreatecomm () {
 
         $comment = new Comment();
-        $posts = Posts::findOne($id);
         $comment->creator = Yii::$app->user->id;
-        $comment->id_post = $posts->id;
+        $user = User::findOne($comment->creator);
+        $comment->id_post =  Yii::$app->request->post('post_id');
         $comment->date_comment = date("Y-m-d");
         $comment->time_comment = date("H:i ", strtotime("+3 hours"));
-        $comment->text_comment = Yii::$app->request->post('text');
-
+        $comment->text_comment = Yii::$app->request->post('comment');
         $comment->save();
-        if ($comment->load(Yii::$app->request->post()) && $comment->save()) {
-            return $this->renderAjax('addcomment', [
-                'comment' => $comment,
-                'posts' => $posts
-            ]);
+        $com = $comment->find()
+            ->where(['id_post'=>Yii::$app->request->post('post_id')])
+            ->asArray()
+            ->all();
+        for($i=0;$i<count($com);$i++)
+        {
+            $com[$i]['name']=$user['name'];
         }
-        return $this->redirect(['view', 'id' => $comment->id_post]);
+        echo json_encode($com, JSON_UNESCAPED_UNICODE);
     }
 
     /**

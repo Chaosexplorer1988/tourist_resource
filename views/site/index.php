@@ -120,7 +120,7 @@ $this->title = 'My Yii Application';
                         <article class="tags"><em>Сюда можно описание картинки вкорячить</em></article>
                         <img class="img-responsive" src="../upload/store/<?= $item['imagePath']?>" alt="">
 
-                        <a class="button" href="/">Browse Projects</a>
+                        <a class="button" href="/posts/<?= $item['id']?>">Подробнее</a>
                     </div>
                 </div>
             </div>

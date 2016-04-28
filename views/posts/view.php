@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div id="post-cont">
         <h1><?= Html::encode($this->title) ?></h1>
-        <div id="post-text"><img src="../<?= Html::encode($model->image) ?>" width="800px" alt="" style="background: gray; width: 800px; height: 400px;"><p><?= Html::encode($model->text) ?></p></div>
+        <div id="post-text"><img src="../<?= $image ?>" width="800px" alt="" style="background: gray; width: 800px; height: 400px;"><p><?= Html::encode($model->text) ?></p></div>
         <div id="spans"><span><h5>mne nravitsya <?= Html::encode($model->likes) ?></h5></span>
             <span>  date: <?= Html::encode($model->date_post) ?></span>
             <span> time: <?= Html::encode($model->time_post) ?></span>
@@ -37,25 +37,28 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
-<div id="post-comment"><h3>Comments to the Post:</h3>
-    <form action="createcomm/<?= Yii::$app->request->get('id') ?>" method="post">
-        <textarea name="text" cols="15" rows="3"></textarea>
-        <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
-        <input type="submit" name="knopka" value="submit">
-    </form>
-    <div>
+<div id="post-comment"><h3>Комментарии:</h3>
+
+        <textarea name="text" id="text_comment" cols="15" rows="3"></textarea>        
+        <input type="hidden" id="post_id" name="post_id" value="<?=Yii::$app->request->get('id')?>" />
+        <input type="submit" id="comment" name="knopka" value="submit">
+    <div id="messenge">
         <?php
         for ($i = 0; $i < count($comments); $i++) {
             ?>
             <div class="one-comment">
-                <p><span> author: <?= Html::encode($user->name . ' ' . $user->surname); ?></span><span> <?= Html::encode($comments[$i]['date_comment']); ?></span><span> <?= Html::encode($comments[$i]['time_comment']); ?></span></p>
+                <p><span> автор: <?= Html::encode($user->name); ?></span>
+                    <span style="float: right"> <?= Html::encode($comments[$i]['date_comment']); ?></span>
+                </p>
                 <p><?= Html::encode($comments[$i]['text_comment']); ?></p>
             </div>
             <?php
         }
         ?>
     </div>
-</div>
+
+
+
 
 <!--  <?= DetailView::widget([
     'model' => $model,
