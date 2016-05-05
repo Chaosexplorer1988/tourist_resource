@@ -50,6 +50,8 @@ class PostsSearch extends Posts
         ]);
 
         $this->load($params);
+        $query->joinWith('author');
+        $query->where("table_user.id=".Yii::$app->user->id);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -65,6 +67,7 @@ class PostsSearch extends Posts
             'counts' => $this->counts,
             'date_post' => $this->date_post,
             'time_post' => $this->time_post,
+            'table_user.id' => Yii::$app->user->id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

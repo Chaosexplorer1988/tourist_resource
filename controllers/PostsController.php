@@ -34,9 +34,14 @@ class PostsController extends Controller
                 'only' => ['index','create','update', 'delete'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','update', 'delete'],
+                        'actions' => ['index','create','update','delete'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['view'],
+                        'allow' => true,
+                        'roles' => ['?'],
                     ],
                 ],
             ],
@@ -75,8 +80,14 @@ class PostsController extends Controller
         $model->counts = $model->counts + 1;
         $model->save();
         $user = User::findOne($model->author);
-        $image = $model->getImage();
-        $image = $image->getUrl('800x');
+        $p = new ImageModel();
+        $photo = $p->find()
+            ->select(['itemid', 'filePath'])
+            ->where(['itemid' => $id,'isMain' =>! null])
+            ->asArray()
+            ->one();
+        $images = $model->getImage();
+        $image = $images->getUrl('800x');
         $comments = new Comment;
         $comments = $comments->find()
             ->where(['id_post'=>$id])
@@ -88,7 +99,8 @@ class PostsController extends Controller
             'model' => $this->findModel($id),
             'user' => $user,
             'image' => $image,
-            'comments' => $comments
+            'comments' => $comments,
+            'photo' => $photo
         ]);
     }
 

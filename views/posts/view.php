@@ -23,12 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-
-
     <div id="post-cont">
         <h1><?= Html::encode($this->title) ?></h1>
-        <div id="post-text"><img src="../<?= $image ?>" width="800px" alt="" style="background: gray; width: 800px; height: 400px;"><p><?= Html::encode($model->text) ?></p></div>
+        <?php if(!Yii::$app->user->isGuest){?>
+        <div id="post-text"><img src="../<?= $image ?>" width="800px" alt="" style="background: gray; width: 800px; height: 400px;">
+            <?php } else{?>
+            <div id="post-text"><img src="../upload/store/<?= $photo['filePath'] ?>" width="800px" alt="" style="background: gray; width: 800px; height: 400px;">
+                <?php }?>
+            <p><?= Html::encode($model->text) ?></p></div>
         <div id="spans"><span><h5>mne nravitsya <?= Html::encode($model->likes) ?></h5></span>
             <span>  date: <?= Html::encode($model->date_post) ?></span>
             <span> time: <?= Html::encode($model->time_post) ?></span>

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\AuthAssignment;
 use app\models\LoginForm;
 use Yii;
 use app\models\User;
@@ -83,6 +84,11 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+                    $auth = new AuthAssignment();
+                    $auth->item_name = 'registeruser';
+                    $user_id = Yii::$app->user->id;
+                    $auth->user_id = (string)$user_id;
+                    $auth->save();
                     return $this->goHome();
                 }
             }

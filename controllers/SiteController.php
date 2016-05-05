@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\AuthAssignment;
 use app\models\Country;
 use app\models\ImageModel;
 use app\models\Photos;
@@ -85,7 +86,7 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {            
             return $this->goHome();
         }
         return $this->render('login', [

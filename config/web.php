@@ -78,10 +78,12 @@ $config = [
     'as access' => [
         'class' => 'mdm\admin\classes\AccessControl',
         'allowActions' => [
+            '/yii2images/*',
             'site/*',
             'user/create',
-            'posts/create',
-            'posts/index'
+            'posts/*',
+          //  'posts/create',
+          //  'posts/index'
         ]
     ],
     'params' => $params,

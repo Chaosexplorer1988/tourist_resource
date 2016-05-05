@@ -96,7 +96,7 @@ class Posts extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthor0()
+    public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'author']);
     }
